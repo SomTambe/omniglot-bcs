@@ -1,7 +1,8 @@
 # The Omniglot Challenge [(paper)](https://arxiv.org/abs/1902.03477)
 
 Own Model for the Omniglot Challenge.
-Brain & Cognitive Society, IIT Kanpur
+
+**Brain & Cognitive Society, IIT Kanpur**
 
 ## Proposed methodology
 1.  Convert all stroke data to 5-point splines. :white_check_mark:
