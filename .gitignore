@@ -3,4 +3,4 @@
 __pycache__
 .ipynb_checkpoints
 .vscode
-./images_background/
+images_background/

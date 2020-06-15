@@ -44,11 +44,39 @@ def mat_to_dict(filename="./data_background.mat"):
         character[name] = _dir
     return character
 
+def dict_images(filename="./data_background.mat"):
+    #  images[lang][character][0]['image'][instance][0] -> (105,105) numpy ndarray
+    mat_dict=load_mat(filename)
+    images={}
+    names = []
+
+    for i in range(len(mat_dict['names'])):
+        names.append(str(mat_dict['names'][i].tolist()[0][0]))
+
+    for index,(name,images_dir) in enumerate(zip(names,mat_dict['images'])):
+        images_dir=images_dir[0]
+        
+        _dir=[]
+        for images_subdir in zip(images_dir):
+            images_subdir = images_subdir[0]
+            _subdir = []
+            for images_img in zip(images_subdir):
+                images_img = images_img[0]
+                _img = {}
+                _img['image'] = images_img
+                _subdir.append(_img)
+            _dir.append(_subdir)
+        images[name] = _dir
+
+    return images
+
+
 def rep(arr):
     last=arr[-1].reshape(-1,1)
-    for _ in range(5-arr.shape[0]):
+    for _ in range(25-arr.shape[0]):
         arr=np.append(arr,last,axis=0)
     return arr
+
 def spline_5(primitive,k):
     """
     Args:
@@ -104,7 +132,7 @@ def spline_dict(character):
     return spline_prims
 
 def plot_char(char,typ=''):
-    for i,c in enumerate(char):
+    for _,c in enumerate(char):
         plt.plot(c[:,0],c[:,1],typ)
     plt.axis('square')
     return plt.show()
